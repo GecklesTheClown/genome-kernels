@@ -1,19 +1,18 @@
 pub fn pack_genes(genes: &[u8]) -> Vec<u64> {
-
     let mut packed_genes = vec![0u64; genes.len().div_ceil(64)];
 
     // for 3 genes packed_genes = [float64 float64 float64]
     for (pack, chunk) in packed_genes.iter_mut().zip(genes.chunks(64)) {
         for (pos, gene) in chunk.iter().enumerate() {
-
             if *gene != 1 {
                 continue;
             }
 
             *pack |= 1u64 << pos;
-        } // ADD THIS
-        packed_genes
+        }
     }
+    packed_genes
+}
 
 #[cfg(test)]
 mod tests {
